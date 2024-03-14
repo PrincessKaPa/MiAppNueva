@@ -7,11 +7,11 @@ st.header("This is a safe place. Fel free to be honest, only you can access to t
 st.write("In the fields below you will find the instructions for each interaction. The objective is to analyze how you feel according to the input you give and then give you a feedback according to the results. This is an experiment, therefore the information given by the machine could not be completely accurate. Do not trust this completely ;)")
 image = Image.open('emociones.jpeg')
 
-st.image(image, caption="emociones")
+st.image(image, caption="mind and emotions")
 
 
-texto = st.text_input("Escribe algo", "Este es mi texto")
-st.write("Esto es lo que escribiste: ", texto)
+texto = st.text_input("Type something expressing how you feel", "This is my text")
+st.write("This is what you wrote: ", texto)
 
 st.subheader("Ahora usemos 2 columnas jeje")
 
