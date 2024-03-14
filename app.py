@@ -5,9 +5,9 @@ st.title("My first multimodal app") #Una app web que solo muestra un tìtulo
 st.title("Welcome")
 st.header("This is a safe place. Fel free to be honest, only you can access to the information you provide.")
 st.write("In the fields below you will find the instructions for each interaction. The objective is to analyze how you feel according to the input you give and then give you a feedback according to the results. This is an experiment, therefore the information given by the machine could not be completely accurate. Do not trust this completely ;)")
-image = Image.open('nubesmoradas.jpeg')
+image = Image.open('emociones.jpeg')
 
-st.image(image, caption="nubes moradas")
+st.image(image, caption="emociones")
 
 
 texto = st.text_input("Escribe algo", "Este es mi texto")
