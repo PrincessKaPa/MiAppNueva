@@ -12,6 +12,8 @@ image = Image.open('emociones.jpeg')
 
 st.image(image, caption="mind and emotions")
 translator = Translator()
+video_file = open('Redimi2 - Todo Va a Estar Bien Evan Craft.mp4', 'rb')
+video_bytes = video_file.read()
 
 text = st.text_input("Type something expressing how you feel", "This is my text")
 st.write("This is what you wrote: ", text)
@@ -23,11 +25,12 @@ if text:
   st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
   x=round(blob.sentiment.polarity,2)
   if x >= 0.5:
-      st.write( 'Es un sentimiento Positivo 😊')
+      st.write( 'I am so glad everything seems to be fine 😊')
   elif x <= -0.5:
-      st.write( 'Es un sentimiento Negativo 😔')
+      st.write( 'I'm so sorry to hear this. I hope listening to this song can encourage you: ')
+      st.video(video_bytes)
   else:
-      st.write( 'Es un sentimiento Neutral 😐')
+      st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 
       
 
