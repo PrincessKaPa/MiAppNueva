@@ -27,8 +27,9 @@ if text:
   if x >= 0.5:
       st.write( 'I am so glad everything seems to be fine 😊')
   elif x <= -0.5:
-      st.write( 'I'm so sorry to hear this. I hope listening to this song can encourage you: ')
+      st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you: ")
       st.video(video_bytes)
+    st.write( "And in the meantime you can practice some Spanish")
   else:
       st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 
