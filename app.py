@@ -1,7 +1,10 @@
+from textblob import TextBlob
+import pandas as pd
 import streamlit as st
 from PIL import Image
+from googletrans import Translator
 
-st.title("My first multimodal app") #Una app web que solo muestra un tìtulo
+st.title("My first multimodal app") 
 st.title("Welcome")
 st.header("This is a safe place. Fel free to be honest, only you can access to the information you provide.")
 st.write("In the fields below you will find the instructions for each interaction. The objective is to analyze how you feel according to the input you give and then give you a feedback according to the results. This is an experiment, therefore the information given by the machine could not be completely accurate. Do not trust this completely ;)")
@@ -10,8 +13,33 @@ image = Image.open('emociones.jpeg')
 st.image(image, caption="mind and emotions")
 
 
-texto = st.text_input("Type something expressing how you feel", "This is my text")
-st.write("This is what you wrote: ", texto)
+text = st.text_input("Type something expressing how you feel", "This is my text")
+st.write("This is what you wrote: ", text)
+translation = translator.translate(text, src="es", dest="en")
+if text:
+  translation = translator.translate(text, src="es", dest="en")
+  trans_text = translation.text
+  blob = TextBlob(trans_text)
+  st.write('Polarity: ', round(blob.sentiment.polarity,2))
+  st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
+  x=round(blob.sentiment.polarity,2)
+  if x >= 0.5:
+      st.write( 'Es un sentimiento Positivo 😊')
+  elif x <= -0.5:
+      st.write( 'Es un sentimiento Negativo 😔')
+  else:
+      st.write( 'Es un sentimiento Neutral 😐')
+
+      
+
+st.write("Now you will see the result of the analysis based on what you wrote. And according to that, you will recieve recommendations.")
+
+st.subheader("Press the button to see results")
+if st.button("Analyse"):
+  st.write("Gracias por presionar")
+else:
+  st.write("You haven't pressed the button yet")
+
 
 st.subheader("Ahora usemos 2 columnas jeje")
 
@@ -34,8 +62,4 @@ with col2:
   if modo == "Táctil":
     st.write("El tacto es fundamental para tu interfaz")
 
-st.subheader("Uso de botones")
-if st.button("Presiona el botón"):
-  st.write("Gracias por presionar")
-else:
-  st.write("No lo has presionado aún")
+
