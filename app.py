@@ -15,7 +15,6 @@ st.image(image, caption="mind and emotions")
 
 text = st.text_input("Type something expressing how you feel", "This is my text")
 st.write("This is what you wrote: ", text)
-translation = translator.translate(text, src="es", dest="en")
 if text:
   translation = translator.translate(text, src="es", dest="en")
   trans_text = translation.text
