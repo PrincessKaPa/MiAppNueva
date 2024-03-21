@@ -11,7 +11,7 @@ st.write("In the fields below you will find the instructions for each interactio
 image = Image.open('emociones.jpeg')
 
 st.image(image, caption="mind and emotions")
-
+translator = Translator()
 
 text = st.text_input("Type something expressing how you feel", "This is my text")
 st.write("This is what you wrote: ", text)
