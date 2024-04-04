@@ -49,11 +49,11 @@ except:
 
 texto = st.text_input("Ingrese el texto.")
 
-tld="en"
+tld="es"
 
 def text_to_speech(texto, tld):
     
-    tts = gTTS(texto,"en", tld, slow=False)
+    tts = gTTS(texto,"es", tld, slow=False)
     try:
         my_file_name = texto[0:20]
     except:
