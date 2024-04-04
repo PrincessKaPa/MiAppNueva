@@ -34,12 +34,12 @@ if text:
   st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
   x=round(blob.sentiment.polarity,2)
   if x >= 0.5:
-      texto= st.write( 'I am so glad everything seems to be fine 😊')
+      happytext= st.write( 'I am so glad everything seems to be fine 😊')
   elif x <= -0.5:
-      texto= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
+      sadtext= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
       st.video(video_bytes)
   else:
-      texto= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+      neutraltext= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 st.write("You can keep practicing by listening to my response in Spanish")
 
 st.subheader("Press the button to listen to the translation")
@@ -49,7 +49,7 @@ try:
 except:
     pass
 
-
+texto= st.text_input("Ingresa el texto")
 
 tld="es"
 
