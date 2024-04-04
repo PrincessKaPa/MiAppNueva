@@ -1,4 +1,4 @@
-from textblob import TextBlob
+prafrom textblob import TextBlob
 import pandas as pd
 import streamlit as st
 from PIL import Image
@@ -34,19 +34,22 @@ if text:
   st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
   x=round(blob.sentiment.polarity,2)
   if x >= 0.5:
-      happytext= st.write( 'I am so glad everything seems to be fine 😊')
+      texto= st.write( 'I am so glad everything seems to be fine 😊')
   elif x <= -0.5:
-      sadtext= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
+      texto= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
       st.video(video_bytes)
   else:
-      neutraltext= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+      texto= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+st.write("You can keep practicing by listening to my response in Spanish")
+
+st.subheader("Press the button to listen to the translation")
 
 try:
     os.mkdir("temp")
 except:
     pass
 
-texto = st.text_input("Ingrese el texto.")
+
 
 tld="es"
 
@@ -89,9 +92,7 @@ def remove_files(n):
 remove_files(7)
 
 
-st.write("Would you like me to read something for you according to your emotion?")
 
-st.subheader("Press the button to see translation")
 if st.button("Analyse"):
   st.write("Gracias por presionar")
 else:
