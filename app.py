@@ -4,8 +4,17 @@ import streamlit as st
 from PIL import Image
 from googletrans import Translator
 
-st.title("My first multimodal app") 
-st.title("Welcome")
+import os
+from bokeh.models.widgets import Button
+from bokeh.models import CustomJS
+from streamlit_bokeh_events import streamlit_bokeh_events
+import time
+import glob
+from gtts import gTTS
+
+
+st.title("MY FIRST MULTIMODAL APP") 
+st.title("Welcome!")
 st.header("This is a safe place. Fel free to be honest, only you can access to the information you provide.")
 st.write("In the fields below you will find the instructions for each interaction. The objective is to analyze how you feel according to the input you give and then give you a feedback according to the results. This is an experiment, therefore the information given by the machine could not be completely accurate. Do not trust this completely ;)")
 image = Image.open('emociones.jpeg')
@@ -33,11 +42,57 @@ if text:
   else:
       st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 
-      
+ try:
+    os.mkdir("temp")
+except:
+    pass
 
-st.write("Now you will see the result of the analysis based on what you wrote. And according to that, you will recieve recommendations.")
+texto = st.text_input("Ingrese el texto.")
 
-st.subheader("Press the button to see results")
+tld="es"
+
+def text_to_speech(text, tld):
+    
+    tts = gTTS(texto,"es", tld, slow=False)
+    try:
+        my_file_name = texto[0:20]
+    except:
+        my_file_name = "audio"
+    tts.save(f"temp/{my_file_name}.mp3")
+    return my_file_name, texto
+
+
+#display_output_text = st.checkbox("Verifica el texto")
+
+if st.button("convertir"):
+    result, output_texto = text_to_speech(texto, tld)
+    audio_file = open(f"temp/{result}.mp3", "rb")
+    audio_bytes = audio_file.read()
+    st.markdown(f"## Tú audio:")
+    st.audio(audio_bytes, format="audio/mp3", start_time=0)
+
+    #if display_output_text:
+    st.markdown(f"## Texto en audio:")
+    st.write(f" {output_texto}")
+
+
+def remove_files(n):
+    mp3_files = glob.glob("temp/*mp3")
+    if len(mp3_files) != 0:
+        now = time.time()
+        n_days = n * 86400
+        for f in mp3_files:
+            if os.stat(f).st_mtime < now - n_days:
+                os.remove(f)
+                print("Deleted ", f)
+
+
+remove_files(7)
+
+
+st.write("Would you like me to read something for you according to your emotion?")
+
+st.subheader("Press the button to see translation")
 if st.button("Analyse"):
   st.write("Gracias por presionar")
 else:
