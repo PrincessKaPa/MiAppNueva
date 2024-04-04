@@ -34,13 +34,12 @@ if text:
   st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
   x=round(blob.sentiment.polarity,2)
   if x >= 0.5:
-      st.write( 'I am so glad everything seems to be fine 😊')
+      happytext= st.write( 'I am so glad everything seems to be fine 😊')
   elif x <= -0.5:
-      st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you: ")
+      sadtext= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
       st.video(video_bytes)
-      st.write( "And in the meantime you can practice some Spanish")
   else:
-      st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+      neutraltext= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 
 try:
     os.mkdir("temp")
