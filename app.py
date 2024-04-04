@@ -49,9 +49,9 @@ except:
 
 texto = st.text_input("Ingrese el texto.")
 
-tld="es"
+tld="en"
 
-def text_to_speech(text, tld):
+def text_to_speech(texto, tld):
     
     tts = gTTS(texto,"en", tld, slow=False)
     try:
