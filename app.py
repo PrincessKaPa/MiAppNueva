@@ -42,7 +42,7 @@ if text:
   else:
       st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 
- try:
+try:
     os.mkdir("temp")
 except:
     pass
