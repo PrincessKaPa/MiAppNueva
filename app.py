@@ -1,4 +1,4 @@
-prafrom textblob import TextBlob
+from textblob import TextBlob
 import pandas as pd
 import streamlit as st
 from PIL import Image
