@@ -72,7 +72,6 @@ output_language = "es"
   
     
 def text_to_speech(input_language, output_language, text, tld):
-  .
   translation = translator.translate(text, src=input_language, dest=output_language)
   trans_text = translation.text
   tts = gTTS(trans_text, lang=output_language, tld=tld, slow=False)
