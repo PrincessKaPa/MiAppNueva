@@ -24,6 +24,7 @@ translator = Translator()
 video_file = open('Redimi2 - Todo Va a Estar Bien Evan Craft.mp4', 'rb')
 video_bytes = video_file.read()
 
+st.subheader("In this section, you can express your emotions in the way that suits you best, whether is writing or talking.")
 text = st.text_input("Type something expressing how you feel", "This is my text")
 st.write("This is what you wrote: ", text)
 if text:
