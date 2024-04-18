@@ -77,7 +77,7 @@ result = streamlit_bokeh_events(
 if result:
     if "GET_TEXT" in result:
         st.write(result.get("GET_TEXT"))
-    translation = translator.translate(text, src="es", dest="en")
+    translation = translator.translate(result.get("GET_TEXT"), src="es", dest="en")
     trans_text = translation.text
     blob = TextBlob(trans_text)
     st.write('Polarity: ', round(blob.sentiment.polarity,2))
