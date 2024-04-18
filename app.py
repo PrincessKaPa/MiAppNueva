@@ -42,7 +42,7 @@ if text:
       text= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 
 
-st.subheader("If you feel more comfortable speaking, press the button and tell me how you feel:")
+st.write("If you feel more comfortable speaking, press the button and tell me how you feel:")
 
 
 stt_button = Button(label=" Speak ", width=200)
