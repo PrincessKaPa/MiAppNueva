@@ -83,29 +83,29 @@ def text_to_speech(input_language, output_language, text, tld):
   return my_file_name, trans_text
     
  
-    if st.button("convertir"):
-        result, output_text = text_to_speech(input_language, output_language, text, tld)
-        audio_file = open(f"temp/{result}.mp3", "rb")
-        audio_bytes = audio_file.read()
-        st.markdown(f"## Your audio:")
-        st.audio(audio_bytes, format="audio/mp3", start_time=0)
+  if st.button("convertir"):
+      result, output_text = text_to_speech(input_language, output_language, text, tld)
+      audio_file = open(f"temp/{result}.mp3", "rb")
+      audio_bytes = audio_file.read()
+      st.markdown(f"## Your audio:")
+      st.audio(audio_bytes, format="audio/mp3", start_time=0)
     
-        if display_output_text:
-            st.markdown(f"## Texto de salida:")
-            st.write(f" {output_text}")
+  if display_output_text:
+      st.markdown(f"## Texto de salida:")
+      st.write(f" {output_text}")
     
     
-    def remove_files(n):
-        mp3_files = glob.glob("temp/*mp3")
-        if len(mp3_files) != 0:
-            now = time.time()
-            n_days = n * 86400
-            for f in mp3_files:
-                if os.stat(f).st_mtime < now - n_days:
-                    os.remove(f)
-                    print("Deleted ", f)
+  def remove_files(n):
+   mp3_files = glob.glob("temp/*mp3")
+   if len(mp3_files) != 0:
+        now = time.time()
+        n_days = n * 86400
+        for f in mp3_files:
+            if os.stat(f).st_mtime < now - n_days:
+                os.remove(f)
+                print("Deleted ", f)
 
-    remove_files(7)
+remove_files(7)
 
 try:
     os.mkdir("temp")
