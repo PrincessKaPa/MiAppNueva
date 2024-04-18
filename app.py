@@ -90,3 +90,5 @@ if result:
         st.video(video_bytes)
     else:
         text= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+
+st.write("Dealing with emotions is not always easy, but ignoring them or trying to repress them is not the solution when they are difficult. Being able to express how you feel is important in relationships with others and with ourselves, and honesty is a key factor to a succesfull expression. Thank you for taking the time to test this app. I hope you come back soon.")
