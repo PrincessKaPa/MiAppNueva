@@ -15,7 +15,7 @@ from gtts import gTTS
 
 st.title("MY FIRST MULTIMODAL APP") 
 st.title("Welcome!")
-st.header("This is a safe place. Fel free to be honest, only you can access to the information you provide.")
+st.header("This is a safe place. Feel free to be honest, only you can access to the information you provide.")
 st.write("In the fields below you will find the instructions for each interaction. The objective is to analyze how you feel according to the input you give and then give you a feedback according to the results. This is an experiment, therefore the information given by the machine could not be completely accurate. Do not trust this completely ;)")
 image = Image.open('emociones.jpeg')
 
@@ -77,16 +77,16 @@ result = streamlit_bokeh_events(
 if result:
     if "GET_TEXT" in result:
         st.write(result.get("GET_TEXT"))
-        translation = translator.translate(text, src="es", dest="en")
-        trans_text = translation.text
-        blob = TextBlob(trans_text)
-        st.write('Polarity: ', round(blob.sentiment.polarity,2))
-        st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
-        x=round(blob.sentiment.polarity,2)
-        if x >= 0.5:
-            text= st.write( 'I am so glad everything seems to be fine 😊')
-        elif x <= -0.5:
-            text= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
-            st.video(video_bytes)
-        else:
-            text= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+    translation = translator.translate(text, src="es", dest="en")
+    trans_text = translation.text
+    blob = TextBlob(trans_text)
+    st.write('Polarity: ', round(blob.sentiment.polarity,2))
+    st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
+    x=round(blob.sentiment.polarity,2)
+    if x >= 0.5:
+        text= st.write( 'I am so glad everything seems to be fine 😊')
+    elif x <= -0.5:
+        text= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
+        st.video(video_bytes)
+    else:
+        text= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
