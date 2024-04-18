@@ -34,22 +34,86 @@ if text:
   st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
   x=round(blob.sentiment.polarity,2)
   if x >= 0.5:
-      happytext= st.write( 'I am so glad everything seems to be fine 😊')
+      text= st.write( 'I am so glad everything seems to be fine 😊')
   elif x <= -0.5:
-      sadtext= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
+      text= st.write( "I'm so sorry to hear this. I hope listening to this song can encourage you. And in the meantime you can practice some Spanish")
       st.video(video_bytes)
   else:
-      neutraltext= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
+      text= st.write( "I'm not sure I can help you. But just in case, remember that God loves you")
 st.write("You can keep practicing by listening to my response in Spanish")
 
 st.subheader("Press the button to listen to the translation")
+
+
+
+result = streamlit_bokeh_events(
+    stt_button,
+    events="GET_TEXT",
+    key="listen",
+    refresh_on_update=False,
+    override_height=75,
+    debounce_time=0)
+
+if result:
+    if "GET_TEXT" in result:
+        st.write(result.get("GET_TEXT"))
+    try:
+        os.mkdir("temp")
+    except:
+        pass
+    st.title("Texto a Audio")
+    translator = Translator()
+    
+    text = str(result.get("GET_TEXT"))
+  
+input_language = "en"
+ 
+output_language = "es"
+  
+    
+    def text_to_speech(input_language, output_language, text, tld):
+        translation = translator.translate(text, src=input_language, dest=output_language)
+        trans_text = translation.text
+        tts = gTTS(trans_text, lang=output_language, tld=tld, slow=False)
+        try:
+            my_file_name = text[0:20]
+        except:
+            my_file_name = "audio"
+        tts.save(f"temp/{my_file_name}.mp3")
+        return my_file_name, trans_text
+    
+ 
+    
+    if st.button("convertir"):
+        result, output_text = text_to_speech(input_language, output_language, text, tld)
+        audio_file = open(f"temp/{result}.mp3", "rb")
+        audio_bytes = audio_file.read()
+        st.markdown(f"## Your audio:")
+        st.audio(audio_bytes, format="audio/mp3", start_time=0)
+    
+        if display_output_text:
+            st.markdown(f"## Texto de salida:")
+            st.write(f" {output_text}")
+    
+    
+    def remove_files(n):
+        mp3_files = glob.glob("temp/*mp3")
+        if len(mp3_files) != 0:
+            now = time.time()
+            n_days = n * 86400
+            for f in mp3_files:
+                if os.stat(f).st_mtime < now - n_days:
+                    os.remove(f)
+                    print("Deleted ", f)
+
+    remove_files(7)
 
 try:
     os.mkdir("temp")
 except:
     pass
 
-texto= st.text_input("Ingresa el texto")
+texto= text
 
 tld="es"
 
@@ -62,6 +126,7 @@ def text_to_speech(texto, tld):
         my_file_name = "audio"
     tts.save(f"temp/{my_file_name}.mp3")
     return my_file_name, texto
+
 
 
 #display_output_text = st.checkbox("Verifica el texto")
@@ -90,34 +155,4 @@ def remove_files(n):
 
 
 remove_files(7)
-
-
-
-if st.button("Analyse"):
-  st.write("Gracias por presionar")
-else:
-  st.write("You haven't pressed the button yet")
-
-
-st.subheader("Ahora usemos 2 columnas jeje")
-
-col1, col2 = st.columns(2)
-
-with col1:
-  st.subheader("Te presento la primera columna :)")
-  st.write("Las interfaces multomodales mejoran la experiencia de usuario")
-  resp = st.checkbox("Estoy de acuerdo")
-  if resp:
-    st.write("¡Correcto!")
-
-with col2:
-  st.subheader("Y aquí está la segunda columna ^^")
-  modo = st.radio("¿Qué modalidad es la principal en tu interfaz?", ("Visual", "Auditiva", "Táctil"))
-  if modo == "Visual":
-    st.write("La vista es fundamental en tu interfaz")
-  if modo == "Auditiva":
-    st.write("La audición es fundamental para tu interfaz")
-  if modo == "Táctil":
-    st.write("El tacto es fundamental para tu interfaz")
-
 
